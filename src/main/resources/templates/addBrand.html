@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+
+
+
+
+	<div class="container">
+		<div class="table-responsive">
+
+			<table id="brandListTable"
+				class="table table-bordered table-hover table-stripted">
+				<thead>
+					<tr>
+
+						<th>Brand Name</th>
+						<th>Update</th>
+						<th>Delete</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr data-th-each="brand : ${brandList}">
+						<td hidden="hidden" th:text="${brand.id}"></td>
+						<td th:text="${brand.brandName}"></td>
+						
+						<td><a onclick="showUpdateBrand(brand.id)" th:href="@{/item/updateFillBrand(id=${brand.id})}"> <span
+								th:text="Update"> </span>
+						</a></td>
+						<td><a onclick="return confirm('Are you sure you want to delete Brand ?')"
+							th:href="@{/item/deleteBrand(id=${brand.id})}"> <span
+								th:text="Delete"> </span>
+						</a></td>
+					</tr>
+				</tbody>
+
+			</table>
+
+
+		</div>
+
+
+
+		<br />
+		<div>
+			<button onclick="showAddBrand()" class="btn btn-success">Add
+				New Brand</button>
+		</div>
+		<br />
+		<form id="addBrand" th:action="@{/item/addBrand}" method="POST"
+			style="display: none">
+			<input type="text" th:value="${brand.brandName}" id="brandName"
+				name="brandName" required="required" />
+
+			<button type="submit" class="btn btn-success">Add</button>
+			
+		</form>
+
+		<form id="updateText" th:style="${updateText ? 'display:block' : 'display:none'}"
+			th:action="@{/item/updateBrand}" method="POST">
+			<input type="text" th:value="${brandName}" id="brandName" name="brandName"
+				required="required" /> <input hidden="hidden" name="id"
+				th:value="${brand.id}" />
+			<button type="submit" class="btn btn-success">Update</button>
+
+		</form>
+	</div>
+
+
+
+
+	<div th:replace="common :: common-scripts" />
+
+	<script type="text/javascript">
+		$("#brandListTable").dataTable();
+	</script>
+
+	<script>
+		function showAddBrand() {
+			document.getElementById("addBrand").style.display = "block";
+		}
+	</script>
+
+	<script>
+		function showUpdateBrand(brand) {
+			document.getElementById("updateBrand").style.display = "block";
+			document.getElementById("updateBrand").text = brand;
+		}
+	</script>
+
+</body>
+</html>

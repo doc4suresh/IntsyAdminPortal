@@ -1,0 +1,512 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+
+	<div th:if="${param.error != null}"
+		class="alert alert-danger alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Error!</strong> Incorrect username or password.
+	</div>
+
+	<div class="wrapper">
+
+		<div class="d-flex justify-content-center h1">Welcome to the
+			Admin Portal Dashboard</div>
+		<br>
+		<!-- Main Panel Starts -->
+		<div class="row mx-md-5">
+
+			<!-- 		left column start  -->
+			<div class="col-2">
+				<div class="nav flex-column nav-pills" id="v-pills-tab"
+					role="tablist" aria-orientation="vertical">
+
+					<a class="nav-link active btn-outline-success"
+						id="v-pills-dashboard-tab" data-toggle="pill"
+						href="#v-pills-dashboard" role="tab"
+						aria-controls="v-pills-dashboard" aria-selected="true">Dashboard</a>
+
+					<a class="nav-link btn-outline-success" id="v-pills-items-tab"
+						data-toggle="pill" href="#v-pills-items" role="tab"
+						aria-controls="v-pills-items" aria-selected="false">Items</a> <a
+						class="nav-link btn-outline-success" id="v-pills-customer-tab"
+						data-toggle="pill" href="#v-pills-customer" role="tab"
+						aria-controls="v-pills-customer" aria-selected="false">Customers</a>
+
+					<a class="nav-link btn-outline-success" id="v-pills-orders-tab"
+						data-toggle="pill" href="#v-pills-orders" role="tab"
+						aria-controls="v-pills-orders" aria-selected="false">Orders</a> <a
+						class="nav-link btn-outline-success" id="v-pills-sales-tab"
+						data-toggle="pill" href="#v-pills-sales" role="tab"
+						aria-controls="v-pills-sales" aria-selected="false">Sales</a>
+				</div>
+			</div>
+			<!-- 		left column finish -->
+
+			<!-- 		right column start -->
+			<div class="col-10">
+				<div class="tab-content" id="v-pills-tabContent">
+
+					<!-- Dashboard Tab Start -->
+					<div class="tab-pane fade show active" id="v-pills-dashboard"
+						role="tabpanel" aria-labelledby="v-pills-dashboard-tab">
+
+						<!-- row one -->
+						<div class="row card-deck">
+							<!-- Box 1 -->
+							<div class="col-6 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Sales for
+									the Month</div>
+
+								<div class="label h2 text-center"
+									th:text="Rs. + ${orderShippedListTotal}"></div>
+
+
+							</div>
+							<!-- Box 2 -->
+							<div class="col-6 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Number of
+									Orders Shipped in this Month</div>
+
+								<div class="label h2 text-center" th:text="${orderShipped}"></div>
+							</div>
+						</div>
+						<br>
+						<!-- row two -->
+						<div class="row card-deck">
+							<!-- Box 3 -->
+							<div class="col-6 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Sales
+									Pending to Ship in this Month</div>
+
+								<div class="label h2 text-center"
+									th:text="Rs. + ${orderPendingListTotal}"></div>
+
+
+							</div>
+
+							<!-- Box 4 -->
+							<div class="col-6 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Number of
+									Pending Orders in this Month</div>
+
+								<div class="label h2 text-center" th:text="${orderPending}"></div>
+							</div>
+						</div>
+						<br>
+						<!-- row three -->
+						<div class="row card-deck">
+							<!-- Box 5   -->
+							<div class="col-6 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Number of
+									Customer to Approve</div>
+
+								<div class="label h2 text-center" th:text="${cusPending}"></div>
+							</div>
+							<!-- Box 6   -->
+							<div class="col-6 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Number of
+									Customers</div>
+
+								<div class="label h2 text-center" th:text="${cusCompleted}"></div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- Tab 2 Items -->
+
+
+
+
+					<div class="tab-pane fade btn-group" id="v-pills-items"
+						role="tabpanel" aria-labelledby="v-pills-items-tab">
+
+						<!-- row one -->
+						<div class="row card-deck">
+							<!-- Box 1 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Low Quantity
+									Items</div>
+								<br>
+								<div class="text-center">
+
+									<a class="btn btn-success btn-lg"
+										th:href="@{/reportLowQtyItems}" target="_blank"> Generate
+										Report</a>
+								</div>
+
+
+							</div>
+							<!-- Box 2 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Special
+									Items</div>
+								<br>
+								<div class="text-center">
+									<a class="btn btn-success btn-lg"
+										th:href="@{/reportSpecialItems}" target="_blank"> Generate
+										Report </a>
+								</div>
+								<br>
+							</div>
+
+							<!-- Box 3 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">New Items
+									added in this month</div>
+								<br>
+								<div class="text-center">
+									<a class="btn btn-success btn-lg" th:href="@{/reportNewItems}"
+										target="_blank"> Generate Report </a>
+								</div>
+								<br>
+							</div>
+
+						</div>
+						<br>
+						<!-- row two -->
+						<div class="row card-deck">
+							<!-- Box 4 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">All Items</div>
+								<br>
+								<div class="text-center">
+
+									<a class="btn btn-success btn-lg" th:href="@{/reportAllItems}"
+										target="_blank"> Generate Report </a>
+
+								</div>
+								<br>
+
+							</div>
+							<!-- Box 5 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Active Items
+									Items</div>
+								<br>
+								<div class="text-center">
+									<a class="btn btn-success btn-lg"
+										th:href="@{/reportActiveItems}" target="_blank"> Generate
+										Report </a>
+								</div>
+								<br>
+							</div>
+
+							<!-- Box 6 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Inactive
+									Items</div>
+								<br>
+								<div class="text-center">
+									<a class="btn btn-success btn-lg"
+										th:href="@{/reportInactiveItems}" target="_blank">Generate
+										Report</a>
+								</div>
+								<br>
+							</div>
+
+						</div>
+						<br>
+						<!-- row three -->
+						<div class="row card-deck">
+							<!-- Box 7 -->
+							<div class="col-12 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">New Items by
+									Date</div>
+								<br>
+
+								<form th:action="@{/reportDateRangeNewItems}" target="_blank"
+									method="POST">
+									<div class="row form-group">
+
+										<div class="col-3 h5 text-success text-right">Date Rage:</div>
+										<div class="col-3 h5 text-success text-center">
+											From: <input type="date" id="fromDate" name="fromDate"
+												required="required">
+										</div>
+										<div class="col-3 h5 text-success text-center">
+											To: <input type="date" id="toDate" name="toDate"
+												required="required">
+										</div>
+										<div class="col-3">
+											<div class="text-center">
+
+												<button type="submit" class="btn btn-success btn-lg">Generate
+													Report</button>
+
+											</div>
+										</div>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+
+					</div>
+
+
+					<!-- Tab 3  -->
+					<div class="tab-pane fade" id="v-pills-customer" role="tabpanel"
+						aria-labelledby="v-pills-customer-tab">
+
+						<!-- row one -->
+						<div class="row card-deck">
+							<!-- Box 1 -->
+							<div class="col-12 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Registered
+									Customers Pending for Approval</div>
+								<br>
+								<div class="text-center">
+
+									<a class="btn btn-success btn-lg"
+										th:href="@{/reportCustomerPending}" target="_blank">
+										Generate Report </a>
+
+								</div>
+								<br>
+
+							</div>
+						</div>
+						<br>
+						<div class="row card-deck">
+							<!-- Box 2 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">All Approved
+									Customers</div>
+								<br>
+								<div class="text-center">
+									<a class="btn btn-success btn-lg"
+										th:href="@{/reportCustomerApproved}" target="_blank">
+										Generate Report </a>
+								</div>
+								<br>
+							</div>
+
+							<!-- Box 3 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Customers -
+									Integrators</div>
+								<br>
+								<div class="text-center">
+									<a class="btn btn-success btn-lg"
+										th:href="@{/reportCustomerIntegrators}" target="_blank">Generate
+										Report</a>
+								</div>
+								<br>
+							</div>
+
+							<!-- Box 4 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Customers -
+									Distributors</div>
+								<br>
+								<div class="text-center">
+									<a class="btn btn-success btn-lg"
+										th:href="@{/reportCustomerDistributors}" target="_blank">Generate
+										Report</a>
+								</div>
+								<br>
+							</div>
+
+						</div>
+
+
+
+
+					</div>
+					<!--  End Tab 3  -->
+
+					<!--  Tab 4 -->
+					<div class="tab-pane fade" id="v-pills-orders" role="tabpanel"
+						aria-labelledby="v-pills-orders-tab">
+
+						<!-- row one -->
+						<div class="row card-deck">
+							<!-- Box 1 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Pending
+									Orders to Ship</div>
+								<br>
+								<div class="text-center">
+
+									<a class="btn btn-success btn-lg" th:href="@{/orderPending}"
+										target="_blank"> Generate Report </a>
+
+								</div>
+								<br>
+
+							</div>
+							<!-- Box 2 -->
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Orders
+									Shipped in this month</div>
+								<br>
+								<div class="text-center">
+									<a class="btn btn-success btn-lg"
+										th:href="@{/orderShippedMonth}" target="_blank"> Generate
+										Report </a>
+								</div>
+								<br>
+							</div>
+
+<!-- 							Box 6
+							<div class="col-4 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Inactive
+									Items</div>
+								<br>
+								<div class="text-center">
+									<a class="btn btn-success btn-lg"
+										th:href="@{/reportInactiveItems}" target="_blank">Generate
+										Report</a>
+								</div>
+								<br>
+							</div> -->
+
+						</div>
+						<br>
+						<!-- row two -->
+						<div class="row card-deck">
+							<!-- Box 7 -->
+							<div class="col-12 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Orders by
+									Date</div>
+								<br>
+
+								<form th:action="@{/reportOrdersShippedDateRange}"
+									target="_blank" method="POST">
+									<div class="row form-group">
+
+										<div class="col-3 h5 text-success text-right">Date Rage:</div>
+										<div class="col-3 h5 text-success text-center">
+											From: <input type="date" id="fromDate" name="fromDate"
+												required="required">
+										</div>
+										<div class="col-3 h5 text-success text-center">
+											To: <input type="date" id="toDate" name="toDate"
+												required="required">
+										</div>
+										<div class="col-3">
+											<div class="text-center">
+
+												<button type="submit" class="btn btn-success btn-lg">Generate
+													Report</button>
+
+											</div>
+										</div>
+									</div>
+
+
+								</form>
+
+							</div>
+						</div>
+
+
+
+
+
+
+
+					</div>
+					<!-- Tab 4 Finish -->
+
+
+					<!--  Tab 5 Sales-->
+					<div class="tab-pane fade" id="v-pills-sales" role="tabpanel"
+						aria-labelledby="v-pills-sales-tab">
+
+						<!-- row one -->
+						<div class="row card-deck">
+							<!-- Box one -->
+							<div class="col-12 card border-success bg-light">
+								<br>
+								<div class="text-success h4 font-weight-bold">Sales by
+									Item by Date</div>
+								<br>
+
+								<form th:action="@{/reportSalesItemDateRange}" target="_blank"
+									method="POST">
+									<div class="row form-group">
+
+										<div class="col-3 h5 text-success text-center">
+											<label> * Select an Item</label> <select required="required"
+												class="form-control" id="itemId" name="itemId">
+												<option value="" disabled="disabled" selected="selected">Select an Item</option>
+												<option th:each="item:${itemList}" th:value="${item.itemId}"
+													 th:text="${item.getItemCode()}">
+											</select>
+										</div>
+										<div class="col-3 h5 text-success text-center">
+											* From: <input type="date" id="fromDate" name="fromDate"
+												required="required">
+										</div>
+										<div class="col-3 h5 text-success text-center">
+											* To: <input type="date" id="toDate" name="toDate"
+												required="required">
+										</div>
+										<div class="col-3">
+											<div class="text-center">
+
+												<button type="submit" class="btn btn-success btn-lg">Generate
+													Report</button>
+
+											</div>
+										</div>
+									</div>
+
+								</form>
+
+							</div>
+						</div>
+
+					</div>
+					<!-- Tab 5 Finish -->
+
+
+				</div>
+			</div>
+			<!-- 		right column finish -->
+
+
+		</div>
+		<!-- Main Panel Finish -->
+
+
+
+	</div>
+	<!-- div wrapper finish -->
+
+	<div th:replace="common :: common-scripts" />
+
+
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+
+
+
+
+	<div class="container">
+		<div class="table-responsive">
+
+			<table id="categoryListTable"
+				class="table table-bordered table-hover table-stripted">
+				<thead>
+					<tr>
+
+						<th>Category Name</th>
+						<th>Update</th>
+						<th>Delete</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr data-th-each="category : ${categoryList}">
+						<td hidden="hidden" th:text="${category.id}"></td>
+						<td th:text="${category.catName}"></td>
+
+						<td><a
+							th:href="@{/item/updateFillCategory(id=${category.id})}"> <span
+								th:text="Update"> </span>
+						</a></td>
+						<td><a th:href="@{/item/deleteCategory(id=${category.id})}">
+								<span th:text="Delete"> </span>
+						</a></td>
+					</tr>
+				</tbody>
+
+			</table>
+
+
+		</div>
+
+
+
+		<br />
+		<div>
+			<button onclick="showFunction()" class="btn btn-success">Add
+				New Category</button>
+		</div>
+		<br />
+		<form id="addText" th:action="@{/item/addCategory}" method="POST"
+			style="display: none">
+			<input type="text" th:value="${category.catName}" id="catName"
+				name="catName" required="required" />
+
+			<button type="submit" class="btn btn-success">Add</button>
+
+		</form>
+
+<br><br>
+		<form id="updateText"
+			th:style="${updateText} ? 'display:block' : 'display:none'"
+			th:action="@{/item/updateCategory}" method="POST">
+			<input type="text" th:value="${catName}" id="catName" name="catName"
+				required="required" /> <input hidden="hidden" name="id"
+				th:value="${category.id}" />
+			<button type="submit" class="btn btn-success">Update</button>
+
+		</form>
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+
+	<script type="text/javascript">
+		$("#categoryListTable").dataTable();
+	</script>
+
+	<script>
+		function showFunction() {
+			document.getElementById("addText").style.display = "block";
+		}
+	</script>
+
+
+
+</body>
+</html>

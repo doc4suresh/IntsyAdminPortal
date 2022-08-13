@@ -1,0 +1,56 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+	<div class="wrapper container">
+	
+							<div class="card">
+							
+							<div class="card-body">
+							<button id="btn-report-print d-flex justify-content-end" class="btn btn-success" onClick="window.print();">Print Report</button>
+								<div class="h5 text-center">Low Quantity Stock Items</div>
+								<table id="lowStockItems"
+									class="table table-hover table-stripted">
+									<thead>
+										<tr>
+											<th style="width: 25rem;">Item Code</th>
+											<th>Status</th>
+											<th style="width: 10rem;">Count (Max 20)</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr data-th-each="item:${itemList20}">
+											<td th:text="${item.itemCode}"></td>
+											<td><div class="progress">
+													<div class="progress-bar"
+														th:classappend="${item.qty}<10 ? bg-danger : bg-success"
+														role="progressbar" th:aria-valuenow="${item.qty}"
+														th:style="'width:'+${item.qty}*5 +'%'" aria-valuemin="0"
+														aria-valuemax="20"></div>
+												</div></td>
+											<td th:text="${item.qty}"></td>
+										</tr>
+
+
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+						<br>
+						
+						</div>
+						
+
+	<div th:replace="common :: common-scripts" />
+		<script type="text/javascript">$("#lowStockItems").dataTable();</script>
+
+
+
+</body>
+</html>

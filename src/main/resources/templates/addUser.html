@@ -1,0 +1,114 @@
+
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+
+	<div th:if="${registrationSent}"
+		class="alert alert-success alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Success!</strong> Information submitted successfully you will
+		receive a confirmation email soon.
+	</div>
+
+
+
+	<div th:if="${emailExists}"
+		class="alert alert-danger alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Failed!</strong> User already registered with this email.
+		Please try using different email address.
+	</div>
+
+	<div class="container">
+
+
+		<div class="card card-default">
+		<h2 class="text-center card-header" th:text= "${Edit} ? 'Edit System User' : 'Add System User'"> System User</h2>
+	
+			<div class="card-body">
+
+				<form th:action="@{/user/addUser(Edit=${Edit})}" method="POST">
+
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="role">* User Role : </label> 
+								
+															
+								<select
+									required="required" class="form-control" id="role"
+									name="role" >
+									<option th:each="role:${roleNameList}"  th:value="${role}"  th:text="${role}" th:selected="${Edit}?(${role}=='Admin')">
+									
+
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group">
+								<label for="firstName">* First Name : </label> <input
+									type="text" required="required" placeholder="Enter First Name"
+									class="form-control" id="firstName" name="firstName" th:value="${user.firstName}"/>
+							</div>
+						</div>
+
+						<div class="col-6">
+							<div class="form-group">
+								<label for="lastName">* Last Name : </label> <input type="text" required="required"
+									placeholder="Enter Last Name" class="form-control"
+									id="lastName" name="lastName" th:value="${user.lastName}"/>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group">
+								<label for="email">* Email : </label> <input type="email"
+									required="required" placeholder="Enter Email"
+									class="form-control" id="username" name="username" th:value="${user.username}"
+									th:readonly="${Edit}"/>
+							</div>
+						</div>
+
+						<div class="col-6">
+							<div class="form-group">
+								<label for="mobile">* Mobile : </label> <input type="text"
+									required="required" placeholder="Enter Mobile"
+									class="form-control" id="mobile" name="mobile" th:value="${user.mobile}" pattern="0\d{9}" title="Error: 10 digits are required."/>
+							</div>
+						</div>
+					</div>
+
+
+					
+
+					<div class="text-center">
+					<br>
+						<button type="submit" class="btn btn-success">Submit</button>
+						<button type="reset" class="btn btn-success">Clear</button>
+						<button type="button" class="btn btn-success" onclick="history.back()">Cancel</button>
+					</div>
+				</form>
+				<br>
+
+
+			</div>
+		</div>
+
+	</div>
+	<!-- /container -->
+
+	<div th:replace="common :: common-scripts" />
+
+</body>
+</html>

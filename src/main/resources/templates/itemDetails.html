@@ -1,0 +1,178 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	
+
+	<div th:if="${param.error != null}"
+		class="alert alert-danger alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Error!</strong> Incorrect username or password.
+	</div>
+
+	<div class="card w-50 mx-auto">
+		<div id="aa" class="card-header text-center h2">Item Details</div>
+		<div class="card-body " >
+			<form th:action="@{/item/itemUpdate}" method="post"
+				enctype="multipart/form-data">
+				<div class="form-group row">
+					<label for="category" class="col-sm-2 col-form-label"> *
+						Category</label>
+					<div class="col-sm-7">
+						<select required="required" class="form-control" id="category"
+							name="category">
+							<option th:each="category:${catList}" th:value="${category.getId()}"
+								 th:text="${category.getCatName()}" th:selected="${item.subcategory.category.catName == category.getCatName()}">
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+
+									<label for="subcategory" class="col-sm-2 col-form-label">*
+						Sub Category</label>
+					<div class="col-sm-10">
+
+						<select required="required" class="form-control" id="subcategory"
+							name="subcategory">
+							<option th:each="subcat:${subcatList}"
+								th:value="${subcat.getId()}" th:text="${subcat.getSubcatName()}"
+							th:selected="${item.subcategory.subcatName == subcat.getSubcatName()}">
+						</select>
+					</div>
+					</div>
+					
+				<div class="form-group row">
+					<label for="brand" class="col-sm-2 col-form-label"> * Brand</label>
+			
+					
+						<div class="col-sm-10">
+						<select required="required" class="form-control" id="brand"
+							name="brand">
+							<option th:each="brands:${brandList}"
+								th:value="${brands.getId()}" th:selected="${brands.getBrandName()==item.brand.getBrandName()}"
+								th:text="${brands.getBrandName()}">
+						</select>
+					</div>
+					
+					
+				</div>
+				
+				<div class="form-group row">
+					<label for="itemCode" class="col-sm-2 col-form-label"> *
+						Item Code</label>
+					<div class="col-sm-10">
+						<input th:value="${item.itemCode}" type="text"
+							class="form-control" id="itemCode" name="itemCode"
+							required="required" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="itemName" class="col-sm-2 col-form-label"> *
+						Item Name</label>
+					<div class="col-sm-10">
+						<input th:value="${item.itemName}" type="text"
+							class="form-control" id="itemName" name="itemName"
+							required="required" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="itemDescription" class="col-sm-2 col-form-label">
+						* Item Description</label>
+					<div class="col-sm-10">
+						<textarea th:text="${item.itemDescription}" class="form-control"
+							id="itemDescription" name="itemDescription" rows="3"
+							required="required"></textarea>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="qty" class="col-sm-2 col-form-label"> *
+						Quantity</label>
+					<div class="col-sm-7">
+						<input th:value="${item.qty}" type="number" class="form-control"
+							id="qty" name="qty" required="required" />
+					</div>
+										<div class="col-sm-3">
+						<a th:href="@{/item/receiveItem(id=${item.itemId})}"
+							class="btn btn-success btn-block">Receive Items</a>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="sellPrice" class="col-sm-2 col-form-label"> *
+						Selling Price</label>
+					<div class="col-sm-10">
+						<input th:value="${#numbers.formatDecimal(item.sellPrice, 0 ,2)}" type="number"
+							class="form-control" id="sellPrice" name="sellPrice"
+							required="required" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="buyPrice" class="col-sm-2 col-form-label"> *
+						Buying Price</label>
+					<div class="col-sm-10">
+						<input th:value="${#numbers.formatDecimal(item.buyPrice, 0 ,2)}" type="number"
+							class="form-control" id="buyPrice" name="buyPrice"
+							required="required" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="itemImage" class="col-sm-2 col-form-label">
+						Image</label>
+					<div class="col-sm-10">
+						<input th:value="${item.itemImage}" type="file"
+							class="form-control-file" id="itemImage" name="itemImage">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="acitve" class="col-sm-2 col-form-label"> Item
+						Status</label>
+					<div class="col-sm-10">
+						<label><input value=true  type="radio" name="active"
+							th:checked="${item.active}? true:false" /> Active </label> <label><input value=false
+							type="radio" name="active"  th:checked="${item.active}? false:true"/> Inactive </label>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="special" class="col-sm-2 col-form-label">
+						Listed as Special </label>
+					<div class="col-sm-10">
+						<label><input value="true" type="radio" name="special"
+							th:checked="${item.special}? true:false"/> Yes </label> <label><input value="false"
+							type="radio" name="special" th:checked="${item.special}? false:true"/> No </label>
+					</div>
+				</div>
+
+				<div class="text-center">
+				<br>	
+
+							
+					<button id="submit" type="submit" class="btn btn-success" >Update</button>
+					<button type="reset" class="btn btn-success">Clear</button>
+<button type="button" class="btn btn-success" onclick="history.back()">Cancel</button>					
+					<input hidden="hidden" name="itemId" th:value="${item.itemId}" />
+				</div>
+
+
+
+
+			</form>
+		</div>
+
+	</div>
+
+
+
+
+
+
+	<div th:replace="common :: common-scripts" />
+<!-- 				<script src="/adminportal/js/script.js"></script> -->
+		
+	
+
+
+
+</body>
+</html>

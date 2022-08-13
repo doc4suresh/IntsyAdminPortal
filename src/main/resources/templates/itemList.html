@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+
+
+
+
+	<div class="container-fluid ">
+		<div class="table-responsive">
+
+			<table id="itemListTable"
+				class="table table-bordered table-hover table-stripted">
+				<thead>
+					<tr>
+						<th>Category</th>
+						<th>Sub Category</th>
+						<th>Item Code</th>
+						<th>Item Name</th>
+						<th>Quantity</th>
+						<th>Sell Price Rs.</th>
+						<th>Buy Price Rs.</th>
+						<th>Specials</th>
+						<th>Action</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr data-th-each="item : ${itemList}">
+						<td th:text="${item.subcategory.category.getCatName()}"></td>
+						<td th:text="${item.subcategory.getSubcatName()}"></td>
+						<td th:text="${item.itemCode}"></td>
+						<td th:text="${item.itemName}"></td>
+						<td th:text="${item.qty}"></td>
+						<td th:text="${#numbers.formatDecimal(item.sellPrice, 0 ,2)}"></td>
+						<td th:text="${#numbers.formatDecimal(item.buyPrice, 0 ,2)}"></td>
+						<td th:text="${item.special}? 'Yes': 'No'"> </td>
+						<td > <a th:href="@{/item/itemDetails(id=${item.itemId})}"> <span th:text="Details"> </span> </a></td>
+						
+					</tr>
+				</tbody>
+
+			</table>
+			
+		</div>
+
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+
+	<script type="text/javascript">
+		$("#itemListTable").dataTable();
+	</script>
+
+</body>
+</html>

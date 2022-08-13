@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+
+
+
+
+	<div class="container">
+		<div class="table-responsive">
+
+			<table id="subcategoryListTable"
+				class="table table-bordered table-hover table-stripted">
+				<thead>
+					<tr>
+
+						<th>Category Name</th>
+						<th>Sub Category Name</th>
+						<th>Update</th>
+						<th>Delete</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+
+					<tr data-th-each="subcategory : ${subcategoryList}">
+						<td hidden="hidden" th:text="${subcategory.id}"></td>
+						<td th:text="${subcategory.getCategory().catName}"></td>
+
+						<td th:text="${subcategory.subcatName}"></td>
+
+						<td><a
+							th:href="@{/item/updateFillSubcategory(id=${subcategory.id})}">
+								<span th:text="Update"> </span>
+						</a></td>
+						<td><a
+							th:href="@{/item/deleteSubcategory(id=${subcategory.id})}"> <span
+								th:text="Delete"> </span>
+						</a></td>
+					</tr>
+
+				</tbody>
+
+			</table>
+
+
+		</div>
+
+
+
+		<br />
+		<div>
+			<button onclick="showFunction()" class="btn btn-success">Add
+				New Sub Category</button>
+		</div>
+		<br />
+		<form id="addText" th:action="@{/item/addSubcategory}" method="POST"
+			style="display: none">
+
+			<div class="form-group row">
+				<label for="subcategory" class="col-sm-4 col-form-label"> *
+					Select Category for New Sub Category</label>
+				<div class="col-sm-4">
+					<select required="required" class="form-control" id="category"
+						name="category">
+						<option th:each="category:${categoryList}"
+							th:value="${category.Id}" th:selected="true"
+							th:text="${category.getCatName()}">
+					</select> <br> <input class="col-sm-8" type="text"
+						th:value="${subcategory.subcatName}" id="subcatName"
+						name="subcatName" required="required" />
+					<button type="submit" class="btn btn-success">Add</button>
+
+				</div>
+			</div>
+		</form>
+
+		<br> <br>
+		<form id="updateText"
+			th:style="${updateText} ? 'display:block' : 'display:none'"
+			th:action="@{/item/updateSubcategory}" method="POST">
+			<input type="text" th:value="${subcatName}" id="subcatName"
+				name="subcatName" required="required" /> <input hidden="hidden"
+				name="id" th:value="${subcategory.id}" />
+			<button type="submit" class="btn btn-success">Update</button>
+
+		</form>
+
+
+
+
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+
+	<script type="text/javascript">
+		$("#subcategoryListTable").dataTable();
+	</script>
+
+	<script>
+		function showFunction() {
+			document.getElementById("addText").style.display = "block";
+		}
+	</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+<br>
+
+	<div class="alert success" th:if="${userUpdated}">
+		<span class="closebtn">&times;</span><strong>Success!</strong> <br>
+		User Information Updated
+	</div>
+	
+
+
+	<div class="container">
+
+		
+
+		<div class="card card-default">
+		<h2 class="card-header d-flex justify-content-center">Customer Profile</h2>
+			<div class="card-body">
+				<div th:classappend="${classActiveEdit}? 'in active'">
+					<form th:action="@{/user/cusApproval}" method="POST">
+
+						<div class="form-group">
+							<label for="regType">* Registration Type : </label> <input
+								type="text" class="form-control" id="regType" name="regType"
+								th:value="${user.regType}" readonly="readonly" />
+						</div>
+
+						<div class="form-group">
+							<label for="firstName">* First Name : </label> <input type="text"
+								class="form-control" id="firstName" name="firstName"
+								th:value="${user.firstName}" pattern="[a-zA-Z]+" title="Error: Please input letters only." />
+						</div>
+
+						<div class="form-group">
+							<label for="lastName">Last Name : </label> <input type="text"
+								class="form-control" id="lastName" name="lastName"
+								th:value="${user.lastName}" pattern="[a-zA-Z]+" title="Error: Please input letters only." />
+						</div>
+
+						<div class="form-group">
+							<label for="email">* Email : </label> <input type="email"
+								class="form-control" id="username" name="username"
+								th:value="${user.username}" />
+						</div>
+
+						<div class="form-group">
+							<label for="mobile">* Mobile : </label> <input type="text"
+								class="form-control" id="mobile" name="mobile"
+								th:value="${user.mobile}" />
+						</div>
+
+						<div class="form-group">
+							<label for="companyName">Company Name : </label> <input
+								type="text" class="form-control" id="companyName"
+								name="companyName" th:value="${user.companyName}" />
+						</div>
+
+						<div class="form-group">
+							<label for="compnayRegNo">Company Registration No : </label> <input
+								type="text" class="form-control" id="companyRegNo"
+								name="companyRegNo" th:value="${user.companyRegNo}" readonly="readonly" />
+						</div>
+
+						<div class="form-group">
+							<label for="address1">* Address 1 : </label> <input type="text"
+								class="form-control" id="address1" name="address1"
+								th:value="${user.address1}" />
+						</div>
+
+
+						<div class="form-group">
+							<label for="address2">Address 2 : </label> <input type="text"
+								class="form-control" id="address2" name="address2"
+								th:value="${user.address2}" />
+						</div>
+
+						<div class="form-group">
+							<label for="city">* City : </label> <input type="text"
+								required="required" class="form-control" id="city" name="city"
+								th:value="${user.city}" pattern="[a-zA-Z]+" title="Error: Please input letters only."/>
+						</div>
+
+
+						<div class="form-group">
+							<label for="district">* District : </label> <input type="text"
+								required="required" class="form-control" id="district"
+								name="district" th:value="${user.district}" />
+						</div>
+						
+										<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="comment">Comment : </label>
+								<textarea placeholder="Customer Comment" class="form-control"
+									id="comment" name="comment" th:value=${user.comment}></textarea>
+							</div>
+						</div>
+					</div>
+
+										
+						<div class="form-group">
+								<label for="status">* Customer Status : </label> <select
+									required="required" id="status" name="status"
+							th:object="${user}"	 th:field="${user.status}" th:disabled="${user.status}==''">
+									<option th:value="Registered" >Registered</option>
+									<option th:value="Approved1">Approved1</option>
+									<option th:value="Approved2">Approved2</option>
+									
+								</select>
+							</div>
+
+						<input type="hidden" name="id" th:value="${user.id}" />
+
+					<div class="text-center">
+						<button type="submit" class="btn btn-success justify-center" >Submit</button>
+					
+<button type="button" class="btn btn-success" onclick="history.back()">Cancel</button>
+						</div>
+
+					</form>
+				</div>
+				<br>
+			</div>
+		</div>
+
+	</div>
+	<!-- /container -->
+
+	<div th:replace="common :: common-scripts" />
+
+</body>
+</html>

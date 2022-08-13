@@ -1,0 +1,67 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+	<div class="wrapper container">
+		<div class="card">
+		
+			<div class="card-body">
+			<button id="btn-report-print d-flex justify-content-end" class="btn btn-success" onClick="window.print();">Print Report</button>
+				<div class="h5 text-center">Special Items</div>
+				<div class="container-fluid ">
+					<div class="table-responsive">
+
+						<table id="specialItemListTable"
+							class="table table-bordered table-hover table-stripted">
+							<thead>
+								<tr>
+									<th>Category</th>
+									<th>Sub Category</th>
+									<th>Item Code</th>
+									<th>Item Name</th>
+									<th>Quantity</th>
+									<th>Sell Price</th>
+									<th>Buy Price</th>
+
+									<th>Action</th>
+
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr data-th-each="item : ${itemListSpecial}">
+									<td th:text="${item.subcategory.getCategory().getCatName()}"></td>
+									<td th:text="${item.subcategory.getSubcatName()}"></td>
+									<td th:text="${item.itemCode}"></td>
+									<td th:text="${item.itemName}"></td>
+									<td th:text="${item.qty}"></td>
+									<td th:text="${#numbers.formatDecimal(item.sellPrice, 0 ,2)}"></td>
+									<td th:text="${#numbers.formatDecimal(item.buyPrice, 0 ,2)}"></td>
+
+									<td><a th:href="@{/item/itemDetails(id=${item.itemId})}">
+											<span th:text="Details"> </span>
+									</a></td>
+
+								</tr>
+							</tbody>
+
+						</table>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+			<script type="text/javascript">$("#specialItemListTable").dataTable();</script>
+
+
+
+</body>
+</html>

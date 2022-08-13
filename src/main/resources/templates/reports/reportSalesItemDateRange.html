@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+	<div class="wrapper container">
+
+		<div class="card">
+			<div class="card-body">
+				<div class="h5 d-flex justify-content-center"
+			th:text="'Sales by Item' + '  '+ ${itemCode} + ' From ' + ${from} + ' To ' + ${to}"  ></div>
+				<div class="container">
+					<div class="table-responsive">
+
+						<table id="orderPendingTable"
+							class="table table-bordered table-hover table-stripted">
+							<thead>
+								<tr>
+									<th>Item Code</th>
+									<th>Order Date</th>
+									<th>Customer</th>
+									<th>Qty</th>
+									<th>Sub Total</th>
+
+
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr data-th-each="cartItem : ${cartItemDateList}">
+									<td th:text="${cartItem.item.itemCode}"></td>
+
+									<td th:text="${cartItem.order.orderDate}"></td>
+									
+									<td th:text="${cartItem.order.user.firstName}"></td>
+									
+									<td th:text="${cartItem.qty}"></td>
+									<td th:text="${cartItem.subtotal}"></td>
+									
+
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<div class="h4 text-right" >TOTAL: <span th:text="${total}"></span>
+						
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+	<script type="text/javascript">
+		$("#orderPendingTable").dataTable();
+	</script>
+
+
+</body>
+</html>

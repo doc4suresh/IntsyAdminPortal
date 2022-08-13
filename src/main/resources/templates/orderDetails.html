@@ -1,0 +1,161 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+
+
+	<div th:if="${param.error != null}"
+		class="alert alert-danger alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Error!</strong> Incorrect username or password.
+	</div>
+
+	<div class="card w-50 mx-auto">
+		<div id="aa" class="card-header text-center h2">Order Details</div>
+		<div class="card-body ">
+			<form th:action="@{/order/orderUpdate}" method="post"
+				enctype="multipart/form-data">
+
+				<div class="form-group row">
+					<label for="id" class="col-sm-2 col-form-label"> Order Id</label>
+					<div class="col-sm-10">
+						<input th:value="${order.id}" type="text" class="form-control"
+							id="id" name="id" readonly="readonly" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="orderStatus" class="col-sm-2 col-form-label">
+						Order Status</label>
+					<div class="col-sm-10">
+						<input th:value="${order.orderStatus}" type="text"
+							class="form-control" id="orderStatus" name="orderStatus"
+							readonly="readonly" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="orderDate" class="col-sm-2 col-form-label">
+						Order Date</label>
+					<div class="col-sm-10">
+						<input th:value="${order.orderDate}" type="text"
+							class="form-control" id="orderDate" readonly="readonly" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="shippingDate" class="col-sm-2 col-form-label">
+						Shipping Date</label>
+					<div class="col-sm-10">
+						<input th:value="${order.shippingDate}" placeholder="Not Shipped "
+							type="text" class="form-control" id="shippingDate"
+							name="shippingDate" readonly="readonly" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="orderTotal" class="col-sm-2 col-form-label">
+						Order Total</label>
+					<div class="col-sm-10">
+						<input th:value="${order.orderTotal}" type="text"
+							class="form-control" id="orderTotal" name="orderTotal"
+							readonly="readonly" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="user.firstName" class="col-sm-2 col-form-label">
+						Customer Name</label>
+					<div class="col-sm-10">
+						<input th:value="${order.user.firstName}" type="text"
+							class="form-control" id="user.firstName" name="user.firstName"
+							readonly="readonly" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="billingAddress" class="col-sm-2 col-form-label">
+						Billing Address</label>
+					<div class="col-sm-10">
+						<input th:value="${order.billingAddress.BillingAddressStreet1} "
+							type="text" class="form-control" id="billingAddress"
+							readonly="readonly" /> <input
+							th:value="${order.billingAddress.BillingAddressStreet2} "
+							type="text" class="form-control" id="billingAddress"
+							readonly="readonly" /> <input
+							th:value="${order.billingAddress.BillingAddressCity} "
+							type="text" class="form-control" id="billingAddress"
+							readonly="readonly" /> <input
+							th:value="${order.billingAddress.BillingAddressDistrict} "
+							type="text" class="form-control" id="billingAddress"
+							readonly="readonly" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="shippingAddress" class="col-sm-2 col-form-label">
+						Shipping Address</label>
+					<div class="col-sm-10">
+						<input th:value="${order.shippingAddress.ShippingAddressName} "
+							type="text" class="form-control" id="shippingAddress"
+							readonly="readonly" /> <input
+							th:value="${order.shippingAddress.ShippingAddressStreet1} "
+							type="text" class="form-control" id="shippingAddress"
+							readonly="readonly" /> <input
+							th:value="${order.shippingAddress.ShippingAddressStreet2} "
+							type="text" class="form-control" id="shippingAddress"
+							readonly="readonly" /> <input
+							th:value="${order.shippingAddress.ShippingAddressCity} "
+							type="text" class="form-control" id="shippingAddress"
+							readonly="readonly" /> <input
+							th:value="${order.shippingAddress.ShippingAddressDistrict} "
+							type="text" class="form-control" id="shippingAddress"
+							readonly="readonly" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="shippingMethod" class="col-sm-2 col-form-label">
+						Shipping Method</label>
+					<div class="col-sm-10">
+						<input th:value="${order.shippingMethod}" type="text"
+							class="form-control" id="shippingMethod" name="shippingMethod"
+							readonly="readonly" />
+					</div>
+				</div>
+
+
+
+
+				<div class="text-center">
+					<br>
+
+					<button id="submit" type="submit" th:disabled="${shipped}"
+						class="btn btn-success">Shipped</button>
+					<button type="button" class="btn btn-success"
+						onclick="history.back()">Cancel</button>
+					<input hidden="hidden" name="orderId" th:value="${order.id}" />
+				</div>
+
+
+
+
+			</form>
+		</div>
+
+	</div>
+
+
+
+
+
+
+	<div th:replace="common :: common-scripts" />
+
+
+
+
+
+</body>
+</html>

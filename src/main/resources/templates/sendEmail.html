@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+
+
+
+
+	<div class="container-fluid ">
+		<div class="table-responsive">
+
+		<form action="@{/emailSpecial}" method="POST">
+		
+		<button type="submit">email Special</button>
+		
+		</form>
+		</div>
+
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+
+	<script type="text/javascript">$("#itemListTable").dataTable();</script>
+
+</body>
+</html>

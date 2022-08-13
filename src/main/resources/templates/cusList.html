@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+
+	<div th:if="${firstApproved}"
+		class="alert alert-danger alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Failed!</strong> User already registered with this email.
+		Please try using different email address.
+	</div>
+
+
+	<div class="container">
+		<div class="table-responsive">
+
+			<table id="customerListTable"
+				class="table table-bordered table-hover table-stripted">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Reg Type</th>
+						<th>First Name</th>
+						<th>Company Name</th>
+						<th>Email</th>
+						<th>Status</th>
+						<th>View</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr data-th-each="user : ${customerUserList}" th:style="${user.status} == 'Registered' ? 'background: lightgreen' : 'background: white'">
+						<td th:text="${user.id}"></td>
+						<td th:text="${user.regType}"></td>
+						<td th:text="${user.firstName}"></td>
+						<td th:text="${user.companyName}"></td>
+						<td th:text="${user.username}"></td>
+						<td th:text="${user.status}"></td>
+						 <td > <a th:href="@{/user/cusProfile(username=${user.username})}"> <span th:text="View"> </span> </a></td>
+					</tr>
+				</tbody>
+
+
+
+
+
+
+			</table>
+
+
+		</div>
+
+
+
+
+
+
+
+
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+	
+		<script type="text/javascript">
+		$("#customerListTable").dataTable();
+	</script>
+
+
+
+</body>
+</html>
