@@ -1,6 +1,6 @@
 ## Intsy Admin Portal
 
-Intsy A CCTV and security system retailer, offers both retail and wholesale services. The Intsy online commerce system's admin interface allows admins to manage reports, purchases, stock, users, and customers.
+Intsy is a wholesale distributor and integrator of security electronic equipment. The company is importing, assembling and distributing security products. The Intsy online commerce system's admin interface allows admins to manage reports, purchases, stock, users, and customers.
 
 ### Tec specs
 - Spring boot 2.1
@@ -10,3 +10,5 @@ Intsy A CCTV and security system retailer, offers both retail and wholesale serv
 - Bootstrap 4
 - Thymeleaf
 - My SQL DB
+- Hibernate
+- Maven
